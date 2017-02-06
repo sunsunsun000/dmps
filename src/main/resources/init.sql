@@ -5,4 +5,12 @@ CREATE TABLE `sys_user` (
   `user_stats` tinyint(4) NOT NULL DEFAULT '1' COMMENT '用户状态',
   `modified_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10011 DEFAULT CHARSET=utf8 COMMENT='用户登陆表'
+) ENGINE=InnoDB AUTO_INCREMENT=10011 DEFAULT CHARSET=utf8 COMMENT='用户登陆表';
+
+CREATE TABLE `persistent_logins` (
+  `series` varchar(64) NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`series`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户记住功能表';
