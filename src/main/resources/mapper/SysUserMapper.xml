@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tanbobo.dmps.mapper.SysUserMapper">
+
+    <resultMap id="sysUser" type="com.tanbobo.dmps.model.SysUser">
+        <id property="id" column="id"/>
+        <result property="loginName" column="login_name"/>
+        <result property="password" column="password"/>
+        <result property="userStats" column="user_stats"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
+    <resultMap id="sysUserMap" type="java.util.HashMap">
+        <id property="id" column="id"/>
+        <result property="loginName" column="login_name"/>
+        <result property="password" column="password"/>
+        <result property="userStats" column="user_stats"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
+    <select id="listMapAllUsers" resultMap="sysUserMap" resultType="java.util.HashMap">
+        SELECT * FROM sys_user
+    </select>
+
+    <select id="listModelAll" resultMap="sysUser" resultType="com.tanbobo.dmps.model.SysUser">
+        SELECT * FROM sys_user
+    </select>
+
+</mapper>

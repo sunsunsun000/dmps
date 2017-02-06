@@ -1,2 +1,40 @@
 server:
   port: 8082
+
+logging:
+    level:
+        tk.mybatis: TRACE
+
+druid:
+    url: jdbc:mysql://127.0.0.1:3306/dmps?characterEncoding=utf8
+    username: root
+    password: tandb
+    initial-size: 1
+    min-idle: 1
+    max-active: 20
+    test-on-borrow: true
+
+spring:
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .ftl
+    freemarker:
+        cache: false
+        request-context-attribute: request
+
+mybatis:
+    type-aliases-package: com.tanbobo.dmps.model
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    mappers:
+        - com.tanbobo.dmps.base.BaseMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
