@@ -1,6 +1,5 @@
 package com.tanbobo.dmps.service.impl;
 
-import com.tanbobo.dmps.mapper.SysRoleResourceMapper;
 import com.tanbobo.dmps.service.SysRoleResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
