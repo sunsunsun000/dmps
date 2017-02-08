@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tanbobo.dmps.mapper.SysRoleMapper">
 
+    <resultMap id="sysRole" type="com.tanbobo.dmps.model.SysRole">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="roleStats" column="role_stats"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
+    <select id="findByRoleName" parameterType="java.lang.String" resultType="java.util.HashMap">
+        select * from sys_role;
+    </select>
+
+    <select id="findRoleById" parameterType="java.lang.Integer" resultMap="sysRole">
+        select * from sys_role where id = #{id};
+    </select>
 </mapper>

@@ -1,9 +1,12 @@
 package com.tanbobo.dmps.service.impl;
 
 import com.tanbobo.dmps.mapper.SysResourceMapper;
+import com.tanbobo.dmps.model.SysResource;
 import com.tanbobo.dmps.service.SysResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * ClassName: SysResourceServiceImpl
@@ -15,4 +18,9 @@ public class SysResourceServiceImpl implements SysResourceService {
 
     @Autowired
     private SysResourceMapper sysResourceMapper;
+
+    @Override
+    public List<SysResource> listAllResource() {
+        return sysResourceMapper.selectAll();
+    }
 }

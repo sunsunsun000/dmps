@@ -20,13 +20,23 @@ public class SysUser extends BaseModel {
      */
     private String password;
     /**
-     * 用户状态
+     * 用户状态(1：有效 0：无效)
      */
     private Integer userStats;
     /**
      * 最后修改时间
      */
     private Date modifiedTime;
+
+    public String getStatsText() {
+        String text = "未知";
+        if (userStats == 1) {
+            text = "启用";
+        } else if (userStats == 0) {
+            text = "禁用";
+        }
+        return text;
+    }
 
     public String getLoginName() {
         return loginName;
@@ -59,5 +69,4 @@ public class SysUser extends BaseModel {
     public void setModifiedTime(Date modifiedTime) {
         this.modifiedTime = modifiedTime;
     }
-
 }

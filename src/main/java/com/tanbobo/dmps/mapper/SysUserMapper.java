@@ -16,4 +16,8 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     public List<Map<String, Objects>> listMapAllUsers();
 
     public List<SysUser> listModelAll();
+
+    SysUser findByName(String userName);
+
+    SysUser getUserById(Integer id);
 }

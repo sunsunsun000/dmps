@@ -40,4 +40,20 @@ public class SysUserServiceImpl implements SysUserService {
     public List<SysUser> listModelAll() {
         return sysUserMapper.listModelAll();
     }
+
+    @Override
+    public SysUser getUserById(Integer id) {
+        return sysUserMapper.getUserById(id);
+    }
+
+    @Override
+    public void saveUser(SysUser entity) {
+        sysUserMapper.insert(entity);
+    }
+
+    @Override
+    public void updateUser(SysUser entity) {
+        sysUserMapper.updateByPrimaryKey(entity);
+    }
+
 }

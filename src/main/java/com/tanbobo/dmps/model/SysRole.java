@@ -27,6 +27,16 @@ public class SysRole extends BaseModel {
      */
     private Date modifiedTime;
 
+    public String getStatsText() {
+        String text = " 未知";
+        if (roleStats == 1) {
+            text = "启用";
+        } else if (roleStats == 0) {
+            text = "禁用";
+        }
+        return text;
+    }
+
     public String getName() {
         return name;
     }

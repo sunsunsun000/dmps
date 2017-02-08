@@ -26,4 +26,9 @@ public interface SysUserService {
      */
     public List<SysUser> listModelAll();
 
+    SysUser getUserById(Integer id);
+
+    void saveUser(SysUser entity);
+
+    void updateUser(SysUser entity);
 }
