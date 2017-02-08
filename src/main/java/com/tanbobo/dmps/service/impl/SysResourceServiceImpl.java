@@ -23,4 +23,19 @@ public class SysResourceServiceImpl implements SysResourceService {
     public List<SysResource> listAllResource() {
         return sysResourceMapper.selectAll();
     }
+
+    @Override
+    public SysResource findResourceById(Integer id) {
+        return sysResourceMapper.findResourceById(id);
+    }
+
+    @Override
+    public Integer saveResource(SysResource entity) {
+        return sysResourceMapper.insert(entity);
+    }
+
+    @Override
+    public Integer updateResource(SysResource entity) {
+        return sysResourceMapper.updateByPrimaryKey(entity);
+    }
 }

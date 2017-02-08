@@ -24,7 +24,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <#--<li><a href="/">首页</a></li>-->
+            <#--<li><a href="/">首页</a></li>-->
             </ul>
             <p class="navbar-text navbar-right">Hi, tanbobo</p>
         </div>
@@ -42,9 +42,9 @@
             <li class="<#if cur?contains("page4")>active</#if>"><a href="${context! }/page4">测试页面四</a></li>
             <li class="<#if cur?contains("page5")>active</#if>"><a href="${context! }/page5">测试页面五</a></li>
             <li>系统设置</li>
-            <li class="<#if cur?contains("user")>active</#if>"><a href="${context! }/user/list">用户管理</a></li>
-            <li class="<#if cur?contains("role")>active</#if>"><a href="${context! }/role/list">角色管理</a></li>
-            <li class="<#if cur?contains("resource")>active</#if>"><a href="${context! }/resource/list">权限管理</a></li>
+            <li class="<#if cur?contains("user_")>active</#if>"><a href="${context! }/user/list">用户管理</a></li>
+            <li class="<#if cur?contains("role_")>active</#if>"><a href="${context! }/role/list">角色管理</a></li>
+            <li class="<#if cur?contains("access_")>active</#if>"><a href="${context! }/access/list">权限管理</a></li>
         </ul>
     </div>
     <div class="col-sm-10 col-sm-offset-2 col-md-10  col-md-offset-2 col-lg-10 col-lg-offset-2 main">

@@ -9,4 +9,5 @@ import com.tanbobo.dmps.model.SysResource;
  * CreateTime: 2017-02-07 00:31
  */
 public interface SysResourceMapper extends BaseMapper<SysResource> {
+    SysResource findResourceById(Integer id);
 }

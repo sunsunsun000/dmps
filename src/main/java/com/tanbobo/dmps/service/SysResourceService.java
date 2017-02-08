@@ -11,4 +11,10 @@ import java.util.List;
  */
 public interface SysResourceService {
     List<SysResource> listAllResource();
+
+    SysResource findResourceById(Integer id);
+
+    Integer saveResource(SysResource entity);
+
+    Integer updateResource(SysResource entity);
 }
