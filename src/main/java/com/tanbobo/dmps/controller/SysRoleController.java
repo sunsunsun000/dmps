@@ -2,8 +2,11 @@ package com.tanbobo.dmps.controller;
 
 import com.tanbobo.dmps.model.SysResource;
 import com.tanbobo.dmps.model.SysRole;
+import com.tanbobo.dmps.model.SysRoleResource;
 import com.tanbobo.dmps.service.SysResourceService;
+import com.tanbobo.dmps.service.SysRoleResourceService;
 import com.tanbobo.dmps.service.SysRoleService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +33,8 @@ public class SysRoleController {
     private SysRoleService sysRoleService;
     @Autowired
     private SysResourceService sysResourceService;
+    @Autowired
+    private SysRoleResourceService sysRoleResourceService;
 
     /**
      * 角色信息列表
@@ -84,9 +90,47 @@ public class SysRoleController {
         SysRole sysRole = sysRoleService.findRoleById(id);
         model.addAttribute("role", sysRole);
 
+        List<Integer> listResourceId = sysRoleResourceService.findAllResourceByRoleId(id);
+        model.addAttribute("resourceIds", listResourceId);
+
         List<SysResource> listResources = listAllResource();
         model.addAttribute("listResources", listResources);
         return "role/access";
+    }
+
+    @RequestMapping(value = "/access", method = RequestMethod.POST)
+    public String saveAccess(@RequestParam("id") Integer id,
+                             @RequestParam("access_ids[]") List<Integer> accessIds,
+                             Model model) {
+
+        SysRole sysRole = sysRoleService.findRoleById(id);
+        try {
+            if (null != sysRole && CollectionUtils.isNotEmpty(accessIds)) {
+                List<SysRoleResource> listRoleResource = new ArrayList<>();
+                for (Integer accessId : accessIds) {
+                    SysRoleResource roleResource = new SysRoleResource();
+                    roleResource.setRoleId(id);
+                    roleResource.setResourceId(accessId);
+                    listRoleResource.add(roleResource);
+                }
+
+                sysRoleResourceService.saveBatchRoleResource(listRoleResource);
+            }
+
+            List<SysRole> listRole = sysRoleService.listAllRoles();
+            model.addAttribute("listRole", listRole);
+
+            return "role/index";
+        } catch (Exception e) {
+            List<SysResource> listResources = listAllResource();
+            model.addAttribute("listResources", listResources);
+
+            model.addAttribute("role", sysRole);
+            model.addAttribute("msg", "操作失败！");
+
+            e.printStackTrace();
+            return "role/access";
+        }
     }
 
     /**

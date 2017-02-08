@@ -12,15 +12,17 @@
 </div>
 <hr/>
 <div class="row">
-    <form id="editForm" action="${context! }/role/save/access" method="post">
+    <form id="editForm" action="${context! }/role/access" method="post">
         <div class="form-horizontal role_access_set_wrap" role="form">
             <div class="form-group">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="checkbox">
+                        <#assign rids = resourceIds />
                         <#if listResources?exists>
                             <#list listResources as item>
                                 <label>
-                                    <input type="checkbox" name="access_ids[]" value="${(item.id)! }"/>
+                                    <input type="checkbox" name="access_ids[]" value="${(item.id)! }"
+                                           <#if rids?seq_contains(item.id)>checked</#if>/>
                                 ${(item.name)! }
                                 </label>
                             </#list>
