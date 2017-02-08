@@ -46,7 +46,7 @@ public class SysUserController {
     public String listAllUsers(Model model) {
         List<SysUser> listModelUser = sysUserService.listModelAll();
         model.addAttribute("listUser", listModelUser);
-        return "user/index";
+        return "admin/user/index";
     }
 
     /**
@@ -65,7 +65,7 @@ public class SysUserController {
 
         List<SysRole> listRoles = getListRoles();
         model.addAttribute("listRoles", listRoles);
-        return "user/edit";
+        return "admin/user/edit";
     }
 
     /**
@@ -85,7 +85,7 @@ public class SysUserController {
 
         List<SysRole> listRoles = getListRoles();
         model.addAttribute("listRoles", listRoles);
-        return "user/edit";
+        return "admin/user/edit";
     }
 
     /**
@@ -153,7 +153,7 @@ public class SysUserController {
         model.addAttribute("listRoleId", listRoleId);
 
         model.addAttribute("user", sysUser);
-        return "user/edit";
+        return "admin/user/edit";
     }
 
     /**

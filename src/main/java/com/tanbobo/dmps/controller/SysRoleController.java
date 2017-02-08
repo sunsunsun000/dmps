@@ -46,7 +46,7 @@ public class SysRoleController {
     public String listRoles(Model model) {
         List<SysRole> listRole = sysRoleService.listAllRoles();
         model.addAttribute("listRole", listRole);
-        return "role/index";
+        return "admin/role/index";
     }
 
     /**
@@ -60,7 +60,7 @@ public class SysRoleController {
         SysRole sysRole = new SysRole();
         model.addAttribute("role", sysRole);
         model.addAttribute("title", "添加角色");
-        return "role/edit";
+        return "admin/role/edit";
     }
 
     /**
@@ -75,7 +75,7 @@ public class SysRoleController {
         SysRole sysRole = sysRoleService.findRoleById(id);
         model.addAttribute("role", sysRole);
         model.addAttribute("title", "编辑角色");
-        return "role/edit";
+        return "admin/role/edit";
     }
 
     /**
@@ -95,7 +95,7 @@ public class SysRoleController {
 
         List<SysResource> listResources = listAllResource();
         model.addAttribute("listResources", listResources);
-        return "role/access";
+        return "admin/role/access";
     }
 
     @RequestMapping(value = "/access", method = RequestMethod.POST)
@@ -120,7 +120,7 @@ public class SysRoleController {
             List<SysRole> listRole = sysRoleService.listAllRoles();
             model.addAttribute("listRole", listRole);
 
-            return "role/index";
+            return "admin/role/index";
         } catch (Exception e) {
             List<SysResource> listResources = listAllResource();
             model.addAttribute("listResources", listResources);
@@ -129,7 +129,7 @@ public class SysRoleController {
             model.addAttribute("msg", "操作失败！");
 
             e.printStackTrace();
-            return "role/access";
+            return "admin/role/access";
         }
     }
 
@@ -182,7 +182,7 @@ public class SysRoleController {
         }
 
         model.addAttribute("role", sysRole);
-        return "role/edit";
+        return "admin/role/edit";
     }
 
     /**

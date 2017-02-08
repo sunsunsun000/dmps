@@ -36,7 +36,7 @@ public class SysResourceController {
     public String listAllResource(Model model) {
         List<SysResource> listResource = sysResourceService.listAllResource();
         model.addAttribute("listResource", listResource);
-        return "access/index";
+        return "admin/access/index";
     }
 
     /**
@@ -50,7 +50,7 @@ public class SysResourceController {
         SysResource resource = new SysResource();
         model.addAttribute("access", resource);
         model.addAttribute("title", "新增权限");
-        return "access/edit";
+        return "admin/access/edit";
     }
 
     /**
@@ -65,7 +65,7 @@ public class SysResourceController {
         SysResource sysResource = sysResourceService.findResourceById(id);
         model.addAttribute("access", sysResource);
         model.addAttribute("title", "编辑权限");
-        return "access/edit";
+        return "admin/access/edit";
     }
 
     /**
@@ -118,6 +118,6 @@ public class SysResourceController {
         }
 
         model.addAttribute("access", sysResource);
-        return "access/edit";
+        return "admin/access/edit";
     }
 }
