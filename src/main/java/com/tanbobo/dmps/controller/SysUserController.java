@@ -2,8 +2,11 @@ package com.tanbobo.dmps.controller;
 
 import com.tanbobo.dmps.model.SysRole;
 import com.tanbobo.dmps.model.SysUser;
+import com.tanbobo.dmps.model.SysUserRole;
 import com.tanbobo.dmps.service.SysRoleService;
+import com.tanbobo.dmps.service.SysUserRoleService;
 import com.tanbobo.dmps.service.SysUserService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +33,8 @@ public class SysUserController {
     private SysUserService sysUserService;
     @Autowired
     private SysRoleService sysRoleService;
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     /**
      * 列表登录用户信息
@@ -53,6 +60,9 @@ public class SysUserController {
         SysUser sysUser = new SysUser();
         model.addAttribute("user", sysUser);
 
+        List<Integer> listRoleId = new ArrayList<>();
+        model.addAttribute("listRoleId", listRoleId);
+
         List<SysRole> listRoles = getListRoles();
         model.addAttribute("listRoles", listRoles);
         return "user/edit";
@@ -69,6 +79,9 @@ public class SysUserController {
     public String editUser(@PathVariable Integer id, Model model) {
         SysUser sysUser = sysUserService.getUserById(id);
         model.addAttribute("user", sysUser);
+
+        List<Integer> listRoleId = sysUserRoleService.findRoleIdByUid(id);
+        model.addAttribute("listRoleId", listRoleId);
 
         List<SysRole> listRoles = getListRoles();
         model.addAttribute("listRoles", listRoles);
@@ -89,15 +102,28 @@ public class SysUserController {
     public String saveUser(@RequestParam(value = "id", required = false) Integer id,
                            @RequestParam(value = "username", required = false) String username,
                            @RequestParam(value = "password", required = false) String password,
+                           @RequestParam(value = "role_ids[]", required = false) List<Integer> roleIds,
                            @RequestParam(value = "stats") Integer stats, Model model) {
 
         SysUser sysUser = new SysUser();
+
+        List<SysUserRole> listUserRole = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(roleIds)) {
+            Date now = new Date();
+            for (Integer roleId : roleIds) {
+                SysUserRole userRole = new SysUserRole();
+                userRole.setUid(id);
+                userRole.setRoleId(roleId);
+                userRole.setCreatedTime(now);
+                listUserRole.add(userRole);
+            }
+        }
 
         if (null != id) {
             try {
                 sysUser = sysUserService.getUserById(id);
                 sysUser.setUserStats(stats);
-                sysUserService.updateUser(sysUser);
+                sysUserService.updateUser(listUserRole, sysUser);
             } catch (Exception e) {
                 model.addAttribute("msg", "操作失败！");
             }
@@ -112,13 +138,19 @@ public class SysUserController {
                 }
                 sysUser.setPassword(password);
                 sysUser.setUserStats(stats);
-                sysUserService.saveUser(sysUser);
+                sysUserService.saveUser(listUserRole, sysUser);
             } catch (RuntimeException e) {
                 model.addAttribute("msg", e.getMessage());
             } catch (Exception e) {
                 model.addAttribute("msg", "操作失败！");
             }
         }
+
+        List<SysRole> listRoles = getListRoles();
+        model.addAttribute("listRoles", listRoles);
+
+        List<Integer> listRoleId = sysUserRoleService.findRoleIdByUid(id);
+        model.addAttribute("listRoleId", listRoleId);
 
         model.addAttribute("user", sysUser);
         return "user/edit";

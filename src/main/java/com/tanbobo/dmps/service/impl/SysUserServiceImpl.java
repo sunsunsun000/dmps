@@ -1,8 +1,11 @@
 package com.tanbobo.dmps.service.impl;
 
 import com.tanbobo.dmps.mapper.SysUserMapper;
+import com.tanbobo.dmps.mapper.SysUserRoleMapper;
 import com.tanbobo.dmps.model.SysUser;
+import com.tanbobo.dmps.model.SysUserRole;
 import com.tanbobo.dmps.service.SysUserService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,8 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
     /**
      * 获取所有登录用户信息
@@ -47,13 +52,21 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public void saveUser(SysUser entity) {
-        sysUserMapper.insert(entity);
+    public void saveUser(List<SysUserRole> listUserRole, SysUser entity) {
+        Integer c = sysUserMapper.insert(entity);
+        if (c > 0 && CollectionUtils.isNotEmpty(listUserRole)) {
+            sysUserRoleMapper.deleteAllByUid(entity.getId());
+            sysUserRoleMapper.insertList(listUserRole);
+        }
     }
 
     @Override
-    public void updateUser(SysUser entity) {
-        sysUserMapper.updateByPrimaryKey(entity);
+    public void updateUser(List<SysUserRole> listUserRole, SysUser entity) {
+        Integer c = sysUserMapper.updateByPrimaryKey(entity);
+        if (c > 0 && CollectionUtils.isNotEmpty(listUserRole)) {
+            sysUserRoleMapper.deleteAllByUid(entity.getId());
+            sysUserRoleMapper.insertList(listUserRole);
+        }
     }
 
 }

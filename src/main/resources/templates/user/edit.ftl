@@ -50,10 +50,12 @@
                 <label class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">所属角色</label>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="checkbox">
+                        <#assign rids = listRoleId />
                         <#if listRoles?exists>
                             <#list listRoles as item>
                                 <label>
-                                    <input type="checkbox" name="role_ids[]" value="${(item.id)! }" checked/>
+                                    <input type="checkbox" name="role_ids[]" value="${(item.id)! }"
+                                           <#if rids?seq_contains(item.id)>checked</#if>/>
                                 ${(item.name)! }
                                 </label>
                             </#list>

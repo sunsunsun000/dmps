@@ -1,6 +1,7 @@
 package com.tanbobo.dmps.service;
 
 import com.tanbobo.dmps.model.SysUser;
+import com.tanbobo.dmps.model.SysUserRole;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public interface SysUserService {
 
     SysUser getUserById(Integer id);
 
-    void saveUser(SysUser entity);
+    void saveUser(List<SysUserRole> listUserRole, SysUser entity);
 
-    void updateUser(SysUser entity);
+    void updateUser(List<SysUserRole> listUserRole, SysUser entity);
 }
