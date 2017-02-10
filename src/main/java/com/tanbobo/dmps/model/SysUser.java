@@ -28,6 +28,17 @@ public class SysUser extends BaseModel {
      */
     private Date modifiedTime;
 
+    public SysUser() {
+    }
+
+    public SysUser(SysUser sysUser) {
+        super(sysUser.getId());
+        this.loginName = sysUser.getLoginName();
+        this.password = sysUser.getPassword();
+        this.userStats = sysUser.getUserStats();
+        this.modifiedTime = sysUser.getModifiedTime();
+    }
+
     public String getStatsText() {
         String text = "未知";
         if (userStats == 1) {

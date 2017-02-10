@@ -4,6 +4,7 @@ server:
 logging:
     level:
         tk.mybatis: TRACE
+        cn.mrdear.mapper: trace
 
 druid:
     url: jdbc:mysql://127.0.0.1:3306/dmps?characterEncoding=utf8

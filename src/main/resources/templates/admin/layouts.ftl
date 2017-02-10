@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="${context! }">RBAC</a>
+            <a class="navbar-brand" href="javascript:void(0);">RBAC</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,7 +26,14 @@
             <ul class="nav navbar-nav">
             <#--<li><a href="/">首页</a></li>-->
             </ul>
-            <p class="navbar-text navbar-right">Hi, tanbobo</p>
+            <#if Session.SPRING_SECURITY_CONTEXT?has_content>
+                <#assign username = Session.SPRING_SECURITY_CONTEXT.authentication.principal.username?default("") />
+                <p class="navbar-text navbar-right">Hi,
+                ${username! }
+                </p>
+            <#else>
+
+            </#if>
         </div>
     </div>
 </nav>
@@ -36,11 +43,11 @@
     <div class="col-sm-2 col-md-2 col-lg-2 sidebar">
         <ul class="nav nav-sidebar">
             <li>权限演示页面</li>
-            <li class="<#if cur?contains("page1")>active</#if>"><a href="${context! }/page1">测试页面一</a></li>
-            <li class="<#if cur?contains("page2")>active</#if>"><a href="${context! }/page2">测试页面二</a></li>
-            <li class="<#if cur?contains("page3")>active</#if>"><a href="${context! }/page3">测试页面三</a></li>
-            <li class="<#if cur?contains("page4")>active</#if>"><a href="${context! }/page4">测试页面四</a></li>
-            <li class="<#if cur?contains("page5")>active</#if>"><a href="${context! }/page5">测试页面五</a></li>
+            <li class="<#if cur?contains("page1")>active</#if>"><a href="${context! }/test/page1">测试页面一</a></li>
+            <li class="<#if cur?contains("page2")>active</#if>"><a href="${context! }/test/page2">测试页面二</a></li>
+            <li class="<#if cur?contains("page3")>active</#if>"><a href="${context! }/test/page3">测试页面三</a></li>
+            <li class="<#if cur?contains("page4")>active</#if>"><a href="${context! }/test/page4">测试页面四</a></li>
+            <li class="<#if cur?contains("page5")>active</#if>"><a href="${context! }/test/page5">测试页面五</a></li>
             <li>系统设置</li>
             <li class="<#if cur?contains("user_")>active</#if>"><a href="${context! }/user/list">用户管理</a></li>
             <li class="<#if cur?contains("role_")>active</#if>"><a href="${context! }/role/list">角色管理</a></li>

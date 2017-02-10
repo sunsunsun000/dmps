@@ -3,6 +3,8 @@ package com.tanbobo.dmps.mapper;
 import com.tanbobo.dmps.base.BaseMapper;
 import com.tanbobo.dmps.model.SysResource;
 
+import java.util.List;
+
 /**
  * ClassName: SysResourceMapper
  * Author: tandingbo
@@ -10,4 +12,6 @@ import com.tanbobo.dmps.model.SysResource;
  */
 public interface SysResourceMapper extends BaseMapper<SysResource> {
     SysResource findResourceById(Integer id);
+
+    List<SysResource> findByRoleId(Integer roleId);
 }

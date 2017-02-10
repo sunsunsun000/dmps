@@ -16,6 +16,13 @@ public class BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    public BaseModel() {
+    }
+
+    public BaseModel(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

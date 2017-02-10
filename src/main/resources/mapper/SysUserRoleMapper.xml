@@ -3,7 +3,7 @@
 <mapper namespace="com.tanbobo.dmps.mapper.SysUserRoleMapper">
 
     <select id="findRoleIdByUid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-      select role_id from sys_user_role where uid = #{uid};
+      select role_id as rid from sys_user_role where uid = #{uid};
     </select>
 
     <delete id="deleteAllByUid" parameterType="java.lang.Integer">

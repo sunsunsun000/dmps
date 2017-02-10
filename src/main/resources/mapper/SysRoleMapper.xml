@@ -10,11 +10,18 @@
         <result property="modifiedTime" column="modified_time"/>
     </resultMap>
 
-    <select id="findByRoleName" parameterType="java.lang.String" resultType="java.util.HashMap">
+    <select id="findAllSysRole" resultMap="sysRole">
         select * from sys_role;
     </select>
 
     <select id="findRoleById" parameterType="java.lang.Integer" resultMap="sysRole">
         select * from sys_role where id = #{id};
+    </select>
+
+    <select id="findRoleInRoleIds" parameterType="java.util.List" resultMap="sysRole">
+        select * from sys_role where id in
+        <foreach item="rid" collection="rids" separator="," open="(" close=")" index="">
+            #{rid}
+        </foreach>
     </select>
 </mapper>
